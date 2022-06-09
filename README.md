@@ -58,13 +58,13 @@ Below are the functionalities for each of the scripts. All scripts are run on a 
 
 ### Model running and benchmarking (for California or Africa test areas)
 
-For model running and benchmarking in the California test areas:
+For model running and benchmarking in the California test areas: San Carlos (`SanCarlos`), Newark (`Newark`), Santa Cruz (`SantaCruz`), Yuba City (`Yuba`), Pacific Grove (`Monterey`), and Salinas (`Salinas`):
 
 ```
 $ cd california
 ```
 
-For model running and benchmarking in the Sub-Saharan Africa (SSA) test areas:
+For model running and benchmarking in the Sub-Saharan Africa (SSA) test areas: Ntinda, Kampala, Uganda (`Kampala_Ntinda`), Kololo, Kampala, Uganda (`Kampala_Kololo`), Highridge, Nairobi, Kenya (`Nairobi_Highridge`), Ngara, Nairobi, Kenya (`Nairobi_Ngara`), Ikeja, Lagos, Nigeria (`Lagos_Ikeja2`).
 
 ```
 $ cd africa
@@ -124,3 +124,35 @@ $ python 8_LOB_to_pole_locations.py
 
 #### Step 9: Pre-processing road and building data
 Run the Jupyter Notebook `9_preprocessing_road_and_building_data.ipynb` for filtering roads and buildings that are located in the given region. Two road segments are merged into a single segment if there is no road intersection between them. This is used for telling whether two detected poles are along the same roads. 
+
+#### Step 10: Attach poles to nearby roads and generate the map of poles
+This script is for attaching detected poles to the nearby road when there is a nearby road to that pole, and potentially inserting additional poles between two predicted poles that are too far apart in order to reduce the number of poles missed by the pole detection model. It finally generates the geospatial map of utility poles.
+```
+$ python 10_road_modeling_and_pole_prediction.py
+```
+
+#### Step 11: Dijkstra's algorithm to connect poles
+This script is for running the modified Dijkstra's algorithm to predict line connections between poles. This algorithm greedily seeks the paths to connect all predicted poles with minimum total weight. Each cell on the raster map is assigned with a weight. The Dijkstra's algorithm is adapted from: https://github.com/facebookresearch/many-to-many-dijkstra. The prediction of this algorithm is used as a feature input to the link prediction model.
+```
+$ python 11_dijkstria_algorithm.py
+```
+
+#### Step 12: Link prediction
+This script is for using link prediction model to predict whether there is a power line between two utility poles by leveraging the predicted pole/line information as well as road information.
+```
+$ python 12_line_prediction_test_overall.py
+```
+New link prediction models can be trained and compared with cross-validation by running the Jupyter Notebook `12_line_prediction_model_development.ipynb` under `california` directory (using "San Carlos" as a development set). However, training new models are not required for running the above script as the models used in the paper are already provided.
+
+#### Step 13: Predict underground grids
+This script is for predicting the underground grid on top of the predicted overhead grid by leveraging the modified Dijkstra's algorithm. This algorithm greedily seeks the paths with minimum total weight to connect all buildings that cannot be reached by predicted overhead grid within a certain distance.  Each cell in the raster is assigned with a weight. The Dijkstra's algorithm is adapted from: https://github.com/facebookresearch/many-to-many-dijkstra. The entire predicted grid map (overhead + underground) are benchmarked against the ground truth data.
+```
+$ python 13_connect_underground.py
+```
+**Note**: step 13 does not apply to the Sub-Saharan Africa test areas because the 100% building electricity access assumption does not necessarily hold in Sub-Saharan Africa.
+
+
+
+
+
+
