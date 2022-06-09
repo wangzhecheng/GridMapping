@@ -58,4 +58,69 @@ Below are the functionalities for each of the scripts. All scripts are run on a 
 
 ### Model running and benchmarking (for California or Africa test areas)
 
+For model running and benchmarking in the California test areas:
 
+```
+$ cd california
+```
+
+For model running and benchmarking in the Sub-Saharan Africa (SSA) test areas:
+
+```
+$ cd africa
+```
+
+They share the same pipeline for model running and benchmarking:
+
+#### Step 1: Retrieve the meta data of street view images
+A prerequisite of retrieving street view imagery meta data (presence or absence of street view images at a given location) is Google API keys. Please go to [Google Cloud Console](https://console.cloud.google.com/) to create private API keys (which is associated with Google account and cannot be shared). Add API key strings to the placeholder in `streetView.py`. Given a region (specified by its name, e.g., "Salinas"), we can run the following script for retrieving the street view meta data in this region.
+
+```
+$ python 1_search_area_GSV.py
+```
+
+#### Step 2: Download street view images
+This is to download all available street view images in a given region (e.g., "Salinas").
+```
+$ python 2_download_area_GSV.py
+```
+Note that API keys are also required for this step.
+
+#### Step 3: Line detection and CAM generation
+This script is for running the line detetor on downloaded street view images. Classification results and CAMs are generated and saved:
+```
+$ python 3_predict_line_CAM_pytorch.py
+```
+
+#### Step 4: Extract line directions
+This script is for using Hough transform to extract line directions from the CAMs generated in step 3:
+```
+$ python 4_CAM_to_line_directions.py
+```
+
+#### Step 5: Merge similar line directions
+This script is used for merging similar line directions (i.e., parallel power lines with different phases) estimated in each CAM:
+```
+$ python 5_merge_line_directions.py
+```
+
+#### Step 6: Pole detection and CAM generation
+This script is for running the pole detetor on downloaded street view images. Classification results and CAMs are generated and saved:
+```
+$ python 6_predict_pole_CAM_pytorch.py
+```
+
+#### Step 7: Extract pole orientations
+This script is for extracting pole orientations from the CAMs generated in step 6 and obtaining the Line of Bearings (LOBs, i.e., rays that represent pole orientations):
+```
+$ python 7_CAM_to_pole_LOBs.py
+```
+
+#### Step 8: Pole localization
+This script is for intersecting the Lines of Bearings (LOBs) obtained from step 7 to obtain the pole locations.
+```
+$ python 8_LOB_to_pole_locations.py
+```
+
+#### Step 9: Pre-processing road and building data
+Run the Jupyter Notebook `9_preprocessing_road_and_building_data.ipynb` for filtering roads and buildings that are located in the given region. Two road segments are merged into a single segment if there is no road intersection between them. This is used for telling whether two detected poles are along the same roads. 
