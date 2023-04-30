@@ -1,6 +1,8 @@
-# Geospatial Mapping of Distribution Grid with Machine Learning and Multi-Modal Open Data
+# Geospatial Mapping of Distribution Grid with Machine Learning and Publicly-Accessible Multi-Modal Data
 
-This repo is a temporary code repo compressed from a private GitHub repo for peer review. It will be made public before publication.
+This is the code repository for the following paper:
+
+* Wang, Z., Majumdar, A., & Rajagopal, R. (2023). Geospatial Mapping of Distribution Grid with Machine Learning and Publicly-Accessible Multi-Modal Data. To appear in Nature Communications. 
 
 The operating system for developing this code repo is Ubuntu 16.04, but it should also be able to run in other environments. The Python version used for developing this code repo is Python 3.6.
 
