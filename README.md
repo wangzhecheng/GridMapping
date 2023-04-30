@@ -34,7 +34,7 @@ GridMapping/results/...
 GridMapping/ground_truth/...
 ```
 
-**Note 1**: for the street view imagery datasets (`line_image_dataset_demo` for line detection, `pole_image_dataset_demo` for pole detection) under `dataset`, due to the restriction of the imagery data source, we are not able to publicly share the full training/validation set. Instead, for each of the line detection and pole detection datasets, we sample 20 images as a demo training set and 20 images as a demo validation set. However, we share full imagery test sets for peer-review purpose only.
+**Note 1**: for the street view imagery datasets (`line_image_dataset_demo` for line detection, `pole_image_dataset_demo` for pole detection) under `dataset`, due to the restriction of the imagery data source, we are not able to publicly share the full training/validation set. Instead, for each of the line detection and pole detection datasets, we sample 20 images as a demo training set and 20 images as a demo validation set.
 
 **Note 2**: to run Jupyter Notebook, the default kernel/environment is "conda_tensorflow_p36", which does not necessarily exist in your computer. Please change the kernel to the one where all required packages are installed.
 
