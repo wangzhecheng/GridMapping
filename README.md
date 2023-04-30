@@ -16,7 +16,7 @@ $ pip install -r requirements.txt
 
 ## Download data and model checkpoints
 
-Run the following command lines to download the ZIP files right under the code repo directory:
+Run the following command lines to download the ZIP files right under the code repo directory. Alternatively, they can be downloaded from the Figshare repository https://doi.org/10.6084/m9.figshare.22723171.
 
 ```
 $ curl -O https://opendatasharing.s3.us-west-2.amazonaws.com/GridMapping/checkpoint.zip
@@ -34,9 +34,9 @@ GridMapping/results/...
 GridMapping/ground_truth/...
 ```
 
-**Note 1**: for the street view imagery datasets (`line_image_dataset_demo` for line detection, `pole_image_dataset_demo` for pole detection) under `dataset`, due to the restriction of the imagery data source, we are not able to publicly share the full training/validation set. Instead, for each of the line detection and pole detection datasets, we sample 20 images as a demo training set and 20 images as a demo validation set.
+**Note 1**: For the street view imagery datasets (`line_image_dataset_demo` for line detection, `pole_image_dataset_demo` for pole detection) under `dataset`, we do not publicly share the full training/validation set due to the restriction of the imagery data source. Instead, for each of the line detection and pole detection datasets, we sample 20 images for training, validation, and test sets each. Street view images in the test areas can be retrieved by running `california/2_download_area_GSV.py` or `africa/2_download_area_GSV.py` in this code repo.
 
-**Note 2**: to run Jupyter Notebook, the default kernel/environment is "conda_tensorflow_p36", which does not necessarily exist in your computer. Please change the kernel to the one where all required packages are installed.
+**Note 2**: To run Jupyter Notebook, the default kernel/environment is "conda_tensorflow_p36", which does not necessarily exist in your computer. Please change the kernel to the one where all required packages are installed.
 
 ## Functionality of each script/notebook
 
