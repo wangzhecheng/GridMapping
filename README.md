@@ -81,15 +81,15 @@ A prerequisite of retrieving street view imagery meta data (presence or absence 
 $ python 1_search_area_GSV.py
 ```
 
-#### Step 2: Download street view images
-This is to download all available street view images in a given region (e.g., "Salinas").
+#### Step 2: Get street view images
+This is to get available street view images in a given region (e.g., "Salinas").
 ```
 $ python 2_download_area_GSV.py
 ```
 Note that API keys are also required for this step.
 
 #### Step 3: Line detection and CAM generation
-This script is for running the line detetor on downloaded street view images. Classification results and CAMs are generated and saved:
+This script is for running the line detetor on street view images. Classification results and CAMs are generated and saved:
 ```
 $ python 3_predict_line_CAM_pytorch.py
 ```
@@ -107,7 +107,7 @@ $ python 5_merge_line_directions.py
 ```
 
 #### Step 6: Pole detection and CAM generation
-This script is for running the pole detetor on downloaded street view images. Classification results and CAMs are generated and saved:
+This script is for running the pole detetor on street view images. Classification results and CAMs are generated and saved:
 ```
 $ python 6_predict_pole_CAM_pytorch.py
 ```
