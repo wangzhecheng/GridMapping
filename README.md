@@ -1,6 +1,6 @@
 # Geospatial Mapping of Distribution Grid with Machine Learning and Publicly-Accessible Multi-Modal Data
 
-This is the code repository for the following paper:
+This is the code repository for the following paper. To use this repo, please cite:
 
 * Wang, Z., Majumdar, A., & Rajagopal, R. (2023). Geospatial Mapping of Distribution Grid with Machine Learning and Publicly-Accessible Multi-Modal Data. To appear in Nature Communications. 
 
